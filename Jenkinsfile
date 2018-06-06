@@ -11,5 +11,10 @@ pipeline {
                 echo 'Testing'
             }
         }
+        stage('Build pipleline sub') {
+            steps {
+                build 'pipeline-sub'
+            }
+        }
     }
 }
