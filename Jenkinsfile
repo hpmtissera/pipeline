@@ -23,6 +23,7 @@ pipeline {
                        cat README.md
                       '''
                 }
+                sh './Build/ova-build.sh'
             }
         }
     }
