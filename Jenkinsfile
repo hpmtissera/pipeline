@@ -16,6 +16,10 @@ pipeline {
                 dir('pipeline-sub') {
                    git url: 'https://github.com/prasadlvi/pipeline-sub.git'
                 }
+                sh '''
+                    cd pipeline-sub
+                    cat README.md
+                '''
             }
         }
     }
