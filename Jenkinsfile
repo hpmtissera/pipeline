@@ -11,10 +11,12 @@ pipeline {
                 echo 'Testing'
             }
         }
-      //  stage('Build pipleline sub') {
-       //     steps {
-        //        build 'pipeline-sub'
-        //    }
-     //   }
+        stage('Build pipleline sub') {
+            steps {
+                dir('pipeline-sub') {
+                   git url: 'https://github.com/prasadlvi/pipeline-sub.git'
+                }
+            }
+        }
     }
 }
