@@ -11,11 +11,6 @@ pipeline {
                 echo 'Testing'
             }
         }
-        stage('Confirmation') {
-            steps {
-                input "Do you want to build pipeline sub?"
-            }
-        }
         stage('Build pipleline sub') {
             steps {
                 sh 'pwd'
