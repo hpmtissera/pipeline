@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk'
+    }
+
     tools {
         jdk 'Java 8'
         maven 'Maven'
