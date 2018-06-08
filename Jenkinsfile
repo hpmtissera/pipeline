@@ -30,7 +30,12 @@ pipeline {
                        cat README.md
                       '''
                 }
-                sh './Build/ova-build.sh'
+                sh '''
+                   export prev_version='My previous version'
+                   export branch_name='My branch name'
+                   ./Build/ova-build.sh
+                '''
+               
             }
         }
     }
