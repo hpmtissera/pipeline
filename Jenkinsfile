@@ -13,7 +13,9 @@ pipeline {
     stages {
         stage('Example Build') {
             steps {
-                sh 'export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home''
+                sh '''
+                export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home'
+                '''
                 sh 'echo $JAVA_HOME'
                 sh 'mvn clean install'
             }
