@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Example Build') {
             steps {
-                echo 'Hello World'
+                sh 'mvn clean install'
             }
         }
         stage('Example Test') {
@@ -13,13 +13,10 @@ pipeline {
         }
         stage('Build pipleline sub') {
             steps {
-                sh 'pwd'
                 dir('pipeline-sub') {
-                    sh 'pwd'
                     git branch: 'mybranch',
                             url: 'https://github.com/prasadlvi/pipeline-sub.git'
                     sh '''
-                       pwd
                        cat README.md
                       '''
                 }
