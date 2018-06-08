@@ -15,10 +15,10 @@ pipeline {
             steps {
                 sh 'pwd'
                 dir('pipeline-sub') {
-                   sh 'pwd'
-                   git branch: 'mybranch',
-                       url: 'https://github.com/prasadlvi/pipeline-sub.git'
-                   sh '''
+                    sh 'pwd'
+                    git branch: 'mybranch',
+                            url: 'https://github.com/prasadlvi/pipeline-sub.git'
+                    sh '''
                        pwd
                        cat README.md
                       '''
