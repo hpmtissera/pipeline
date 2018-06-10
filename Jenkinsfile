@@ -28,6 +28,7 @@ pipeline {
                       '''
                 }
                 sh '''
+                   pwd
                    export prev_version='My previous version'
                    export branch_name='My branch name'
                    ./Build/ova-build.sh
