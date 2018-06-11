@@ -27,9 +27,10 @@ pipeline {
                        cat README.md
                       '''
                 }
+                sh 'printenv'
                 sh '''
                    export prev_version='My previous version'
-                   export branch_name=$env.BRANCH_NAME
+                   export branch_name=env.BRANCH_NAME
                    ./Build/ova-build.sh
                 '''
                
