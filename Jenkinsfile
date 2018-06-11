@@ -29,7 +29,7 @@ pipeline {
                 }
                 sh '''
                    export prev_version='My previous version'
-                   export branch_name=${PWD##*/}
+                   export branch_name=$env.BRANCH_NAME
                    ./Build/ova-build.sh
                 '''
                
