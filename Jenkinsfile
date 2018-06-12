@@ -6,6 +6,10 @@ pipeline {
         maven 'Maven'
     }
 
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '2'))
+    }
+
     stages {
         stage('Example Build') {
             steps {
