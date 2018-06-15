@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+
+    agent {
+        any
+        customWorkspace '$GIT_BRANCH'
+    }
 
     tools {
         jdk 'Java 8'
