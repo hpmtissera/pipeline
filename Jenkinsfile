@@ -41,7 +41,9 @@ pipeline {
                 }
                 sh '''
                    export prev_version='My previous version'
-                   export branch_name=$GIT_BRANCH
+                   cd ..
+                   export branch_name=${PWD##*/}
+                   cd -
                    ./Build/ova-build.sh
                 '''
                
@@ -52,6 +54,10 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'target/*'
+            sh '''
+               echo $branch_name
+               echo ${branch_name}
+               '''
         }
     }
 }
