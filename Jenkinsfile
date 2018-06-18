@@ -55,8 +55,9 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'target/*'
             sh '''
-               echo $branch_name
-               echo ${branch_name}
+               cd ..
+               export branch_name=${PWD##*/}
+               cd -
                '''
         }
     }
