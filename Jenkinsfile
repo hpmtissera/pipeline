@@ -55,9 +55,7 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'target/*'
             sh '''
-               cd ..
-               export branch_name=${PWD##*/}
-               cd -
+               echo ${jobconsolename}
                '''
         }
     }
