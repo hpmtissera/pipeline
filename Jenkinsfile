@@ -1,6 +1,9 @@
+def jobnameparts = JOB_NAME.tokenize('/') as String[]
+def jobconsolename = jobnameparts[0]
 pipeline {
 
     agent {
+        echo "${jobconsolename}"
         any
         customWorkspace '$GIT_BRANCH'
     }
