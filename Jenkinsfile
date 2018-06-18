@@ -54,8 +54,17 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'target/*'
+
+            script {
+                if (currentBuild.result == null) {
+                    currentBuild.result = 'SUCCESS'
+                } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
+                    emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
+                }
+            }
+
             sh '''
-               echo ${jobconsolename}
+               echo ${currentBuild.result}
                '''
         }
     }
