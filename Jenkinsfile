@@ -4,9 +4,8 @@ pipeline {
 
     agent {
         node {
-            echo "${jobconsolename}"
             label 'master'
-            customWorkspace "$BRANCH_NAME"
+            customWorkspace "${jobconsolename}"
         }
     }
 
