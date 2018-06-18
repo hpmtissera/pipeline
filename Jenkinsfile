@@ -3,9 +3,11 @@ def jobconsolename = jobnameparts[0]
 pipeline {
 
     agent {
-        any
-        echo "${jobconsolename}"
-        customWorkspace '$GIT_BRANCH'
+        node {
+            echo "${jobconsolename}"
+            label 'master'
+            customWorkspace "$BRANCH_NAME"
+        }
     }
 
     tools {
