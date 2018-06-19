@@ -1,6 +1,7 @@
 import hudson.tasks.test.AbstractTestResultAction
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
+def testResultAction = null
 pipeline {
 
     agent {
@@ -16,7 +17,6 @@ pipeline {
         failed = 0
         skipped = 0
         summary = ""
-        testResultAction = null
     }
 
     tools {
