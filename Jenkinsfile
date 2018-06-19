@@ -65,8 +65,8 @@ pipeline {
             junit 'target/surefire-reports/TEST-*.xml'
             archiveArtifacts artifacts: 'target/*'
 
-            def summary = ""
             script {
+                def summary = ""
                 if (currentBuild.result == null) {
                     currentBuild.result = 'SUCCESS'
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
