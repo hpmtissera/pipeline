@@ -65,6 +65,7 @@ pipeline {
             junit 'target/surefire-reports/TEST-*.xml'
             archiveArtifacts artifacts: 'target/*'
 
+            def summary = ""
             script {
                 if (currentBuild.result == null) {
                     currentBuild.result = 'SUCCESS'
@@ -75,6 +76,13 @@ pipeline {
                 def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
                 if (testResultAction != null) {
                     def total = testResultAction.getTotalCount()
+                    def failed = testResultAction.getFailCount()
+                    def skipped = testResultAction.getSkipCount()
+
+                    summary = "Test results:\n\t"
+                    summary = summary + ("Passed: " + (total - failed - skipped))
+                    summary = summary + (", Failed: " + failed)
+                    summary = summary + (", Skipped: " + skipped)
                 } else {
                     summary = "No tests found"
                 }
