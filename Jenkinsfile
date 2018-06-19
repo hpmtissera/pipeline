@@ -1,3 +1,4 @@
+import hudson.tasks.test.AbstractTestResultAction
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
 pipeline {
