@@ -1,4 +1,5 @@
 import hudson.tasks.test.AbstractTestResultAction
+import hudson.model.Actionable
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
 pipeline {
@@ -70,6 +71,7 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
+                echo getTestSummary()
 //                AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
 //                total = testResultAction.totalCount
 //                failed = testResultAction.failCount
@@ -83,5 +85,27 @@ pipeline {
             echo "Duration : ${currentBuild.durationString.replace(' and counting', '')}"
 
         }
+    }
+
+
+
+    @NonCPS
+    def getTestSummary = { ->
+        def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
+        def summary = ""
+
+        if (testResultAction != null) {
+            def total = testResultAction.getTotalCount()
+            def failed = testResultAction.getFailCount()
+            def skipped = testResultAction.getSkipCount()
+
+            summary = "Test results:\n\t"
+            summary = summary + ("Passed: " + (total - failed - skipped))
+            summary = summary + (", Failed: " + failed)
+            summary = summary + (", Skipped: " + skipped)
+        } else {
+            summary = "No tests found"
+        }
+        return summary
     }
 }
