@@ -1,7 +1,6 @@
 import hudson.tasks.test.AbstractTestResultAction
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
-def testResultAction = null
 pipeline {
 
     agent {
@@ -73,16 +72,9 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
-                testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
+                def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
                 if (testResultAction != null) {
-                    total = testResultAction.getTotalCount()
-                    failed = testResultAction.getFailCount()
-                    skipped = testResultAction.getSkipCount()
-
-                    summary = "Test results:\n\t"
-                    summary = summary + ("Passed: " + (total - failed - skipped))
-                    summary = summary + (", Failed: " + failed)
-                    summary = summary + (", Skipped: " + skipped)
+                    def total = testResultAction.getTotalCount()
                 } else {
                     summary = "No tests found"
                 }
