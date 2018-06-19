@@ -9,6 +9,13 @@ pipeline {
         }
     }
 
+    environment {
+        passed = 0
+        total = 0
+        failed = 0
+        skipped = 0
+    }
+
     tools {
         jdk 'Java 8'
         maven 'Maven'
@@ -62,10 +69,10 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
-                def total = testResultAction.totalCount
-                def failed = testResultAction.failCount
-                def skipped = testResultAction.skipCount
-                def passed = total - failed - skipped
+                total = testResultAction.totalCount
+                failed = testResultAction.failCount
+                skipped = testResultAction.skipCount
+                passed = total - failed - skipped
             }
 
             testStatus = "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
