@@ -11,14 +11,6 @@ pipeline {
         }
     }
 
-    environment {
-        passed = 0
-        total = 0
-        failed = 0
-        skipped = 0
-        summary = ""
-    }
-
     tools {
         jdk 'Java 8'
         maven 'Maven'
@@ -88,6 +80,7 @@ pipeline {
                 }
             }
 
+            mattermostSend message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} after ${currentBuild.durationString.replace(' and counting', '')} <${env.BUILD_URL}|Open>${summary}"
             echo "${summary}"
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
