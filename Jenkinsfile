@@ -71,7 +71,7 @@ pipeline {
                     def failed = testResultAction.getFailCount()
                     def skipped = testResultAction.getSkipCount()
 
-                    summary = "Test results:\n\t"
+                    summary = "\nTest results:\n\t"
                     summary = summary + ("Passed: " + (total - failed - skipped))
                     summary = summary + (", Failed: " + failed)
                     summary = summary + (", Skipped: " + skipped)
