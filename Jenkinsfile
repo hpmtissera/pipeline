@@ -64,6 +64,7 @@ pipeline {
                 }
             }
             echo "RESULT: ${currentBuild.result}"
+            echo "Duration : ${currentBuild.duration}"
 
         }
     }
