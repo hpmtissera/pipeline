@@ -63,6 +63,12 @@ pipeline {
                     echo "Failure unstable email sent"
                 }
             }
+            def total = testResultAction.totalCount
+            def failed = testResultAction.failCount
+            def skipped = testResultAction.skipCount
+            def passed = total - failed - skipped
+            testStatus = "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
+
             echo "RESULT: ${currentBuild.result}"
             echo "Duration : ${currentBuild.duration}"
 
