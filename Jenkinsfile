@@ -75,7 +75,7 @@ pipeline {
                 passed = total - failed - skipped
             }
 
-            testStatus = "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
+            echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
             echo "RESULT: ${currentBuild.result}"
             echo "Duration : ${currentBuild.durationString}"
