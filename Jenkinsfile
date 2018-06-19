@@ -1,5 +1,4 @@
 import hudson.tasks.test.AbstractTestResultAction
-import hudson.model.Actionable
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
 pipeline {
@@ -63,6 +62,7 @@ pipeline {
 
     post {
         always {
+            pwd
             junit 'target/surefire-reports/TEST--*.xml'
             archiveArtifacts artifacts: 'target/*'
 
