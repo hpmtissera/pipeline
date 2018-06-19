@@ -71,12 +71,20 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
-                echo getTestSummary()
-//                AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
-//                total = testResultAction.totalCount
-//                failed = testResultAction.failCount
-//                skipped = testResultAction.skipCount
-//                passed = total - failed - skipped
+                AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
+                if (testResultAction != null) {
+                    total = testResultAction.getTotalCount()
+                    failed = testResultAction.getFailCount()
+                    skipped = testResultAction.getSkipCount()
+
+                    summary = "Test results:\n\t"
+                    summary = summary + ("Passed: " + (total - failed - skipped))
+                    summary = summary + (", Failed: " + failed)
+                    summary = summary + (", Skipped: " + skipped)
+                } else {
+                    summary = "No tests found"
+                }
+                echo ${skipped}
             }
 
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
@@ -87,25 +95,4 @@ pipeline {
         }
     }
 
-
-
-    @NonCPS
-    def getTestSummary = { ->
-        def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
-        def summary = ""
-
-        if (testResultAction != null) {
-            def total = testResultAction.getTotalCount()
-            def failed = testResultAction.getFailCount()
-            def skipped = testResultAction.getSkipCount()
-
-            summary = "Test results:\n\t"
-            summary = summary + ("Passed: " + (total - failed - skipped))
-            summary = summary + (", Failed: " + failed)
-            summary = summary + (", Skipped: " + skipped)
-        } else {
-            summary = "No tests found"
-        }
-        return summary
-    }
 }
