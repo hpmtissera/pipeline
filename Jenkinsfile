@@ -69,13 +69,13 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
-                total = testResultAction.totalCount
-                failed = testResultAction.failCount
-                skipped = testResultAction.skipCount
-                passed = total - failed - skipped
+//                total = testResultAction.totalCount
+//                failed = testResultAction.failCount
+//                skipped = testResultAction.skipCount
+//                passed = total - failed - skipped
             }
 
-            echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
+            // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
             echo "RESULT: ${currentBuild.result}"
             echo "Duration : ${currentBuild.durationString}"
