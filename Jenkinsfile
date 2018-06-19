@@ -64,7 +64,7 @@ pipeline {
             }
 
             sh '''
-               echo ${currentBuild.result}
+               echo $currentBuild.result
                '''
         }
     }
