@@ -1,6 +1,7 @@
 import hudson.tasks.test.AbstractTestResultAction
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
+def summary = ""
 pipeline {
 
     agent {
@@ -66,7 +67,6 @@ pipeline {
             archiveArtifacts artifacts: 'target/*'
 
             script {
-                def summary = ""
                 if (currentBuild.result == null) {
                     currentBuild.result = 'SUCCESS'
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
@@ -86,9 +86,9 @@ pipeline {
                 } else {
                     summary = "No tests found"
                 }
-                echo "${summary}"
             }
 
+            echo "${summary}"
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
             echo "RESULT: ${currentBuild.result}"
