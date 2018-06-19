@@ -57,12 +57,13 @@ pipeline {
 
             script {
                 if (currentBuild.result == null) {
-                    currentBuild.result = 'SUCCESS'
+                    currentBuild.result == 'SUCCESS'
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
+                    echo "Failure unstable email sent"
                 }
-                echo "RESULT: ${currentBuild.result}"
             }
+            echo "RESULT: ${currentBuild.result}"
 
         }
     }
