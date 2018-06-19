@@ -84,7 +84,7 @@ pipeline {
                 } else {
                     summary = "No tests found"
                 }
-                echo ${summary}
+                echo "${summary}"
             }
 
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
