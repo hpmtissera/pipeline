@@ -62,7 +62,9 @@ pipeline {
 
     post {
         always {
-            pwd
+            sh '''
+                       pwd
+                      '''
             junit 'target/surefire-reports/TEST--*.xml'
             archiveArtifacts artifacts: 'target/*'
 
