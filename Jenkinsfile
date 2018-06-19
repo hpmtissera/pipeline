@@ -16,6 +16,7 @@ pipeline {
         total = 0
         failed = 0
         skipped = 0
+        testResultAction = null
     }
 
     tools {
@@ -71,7 +72,7 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
-                AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
+                testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
                 if (testResultAction != null) {
                     total = testResultAction.getTotalCount()
                     failed = testResultAction.getFailCount()
