@@ -70,8 +70,8 @@ pipeline {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     echo "Failure unstable email sent"
                 }
-                AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
-                total = testResultAction.totalCount
+//                AbstractTestResultAction testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
+//                total = testResultAction.totalCount
 //                failed = testResultAction.failCount
 //                skipped = testResultAction.skipCount
 //                passed = total - failed - skipped
