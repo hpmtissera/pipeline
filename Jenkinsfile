@@ -61,9 +61,9 @@ pipeline {
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                 }
+                echo "RESULT: ${currentBuild.result}"
             }
 
-            echo "RESULT: ${currentBuild.result}"
         }
     }
 }
