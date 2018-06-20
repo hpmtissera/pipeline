@@ -11,7 +11,7 @@ pipeline {
     }
 
     environment {
-        jobconsolenameshell = "${jobconsolename1}"
+        jobconsolenameshell = "${jobconsolename}"
     }
 
     tools {
