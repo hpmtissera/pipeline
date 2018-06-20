@@ -30,6 +30,7 @@ pipeline {
         stage('Example Test') {
             steps {
                 echo 'Testing'
+                echo 'Changes introduced'
             }
         }
         stage('Build pipleline sub') {
