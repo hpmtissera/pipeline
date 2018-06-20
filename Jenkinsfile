@@ -94,9 +94,10 @@ pipeline {
 
             mattermostSend message: ""
             echo "${summary}"
+            sh "echo $jobconsolenameshell"
+            sh "echo $jobconsolename"
             sh '''
              echo 'inside shell script'
-             echo $jobconsolenameshell
             '''
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
