@@ -97,7 +97,7 @@ pipeline {
             sh "echo \$jobconsolenameshell"
             sh '''
              echo 'inside shell script'
-             echo \\$jobconsolenameshell
+             echo \$jobconsolenameshell
             '''
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
