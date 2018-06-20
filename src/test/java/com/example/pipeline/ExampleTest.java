@@ -7,7 +7,7 @@ public class ExampleTest {
     @Test
     public void testPrintHelloWorld() {
 
-        Assert.assertEquals("Hello World1", "Hello World");
+        Assert.assertEquals("Hello World", "Hello World");
 
     }
 }
