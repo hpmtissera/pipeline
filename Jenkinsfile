@@ -81,7 +81,7 @@ pipeline {
                 }
             }
 
-            mattermostSend
+            mattermostSend message: ""
             echo "${summary}"
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
