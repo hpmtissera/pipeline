@@ -11,7 +11,9 @@ pipeline {
     }
 
     environment {
-        jobconsolenameshell = "${jobconsolename}"
+        jobnameparts1 = JOB_NAME.tokenize('/') as String[]
+        jobconsolename1 = jobnameparts1[0]
+//        jobconsolenameshell = "${jobconsolename1}"
     }
 
     tools {
@@ -94,10 +96,10 @@ pipeline {
 
             mattermostSend message: ""
             echo "${summary}"
-            sh "echo \$jobconsolename"
+            sh "echo \$jobconsolename1"
             sh '''
              echo 'inside shell script'
-             echo \$jobconsolename
+             echo \$jobconsolename1
             '''
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
