@@ -1,7 +1,6 @@
 import hudson.tasks.test.AbstractTestResultAction
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
-def jobbranchname = jobnameparts[1]
 pipeline {
 
     agent {
@@ -9,6 +8,10 @@ pipeline {
             label 'master'
             customWorkspace "${jobconsolename}"
         }
+    }
+
+    environment {
+        jobconsolenameshell = "${jobconsolename}"
     }
 
     tools {
@@ -93,7 +96,7 @@ pipeline {
             echo "${summary}"
             sh '''
              echo 'inside shell script'
-             echo "$jobconsolename"
+             echo $jobconsolenameshell
             '''
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
