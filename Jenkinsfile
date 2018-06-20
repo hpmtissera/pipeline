@@ -94,8 +94,8 @@ pipeline {
 
             mattermostSend message: ""
             echo "${summary}"
-            sh "echo $jobconsolenameshell"
-            sh "echo $jobconsolename"
+            sh "echo \$jobconsolenameshell"
+            sh "echo \$jobconsolename"
             sh '''
              echo 'inside shell script'
             '''
