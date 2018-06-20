@@ -81,7 +81,7 @@ pipeline {
                 }
             }
 
-            mattermostSend message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} after ${currentBuild.durationString.replace(' and counting', '')} <${env.BUILD_URL}|Open>${summary}"
+            mattermostSend
             echo "${summary}"
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
