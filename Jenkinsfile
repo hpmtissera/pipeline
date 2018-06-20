@@ -1,7 +1,7 @@
 import hudson.tasks.test.AbstractTestResultAction
 def jobnameparts = JOB_NAME.tokenize('/') as String[]
 def jobconsolename = jobnameparts[0]
-def summary = ""
+def jobbranchname = jobnameparts[1]
 pipeline {
 
     agent {
@@ -64,7 +64,15 @@ pipeline {
                     currentBuild.result = 'SUCCESS'
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
                     emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
-                    echo "Failure unstable email sent"
+                    if(currentBuild.result == 'FAILURE') {
+                        mattermostColor = "danger"
+                        mattermostResult = "Failure"
+                        mattermostEmoji = ":no_entry_sign:"
+                    } else {
+                        mattermostColor = "warning"
+                        mattermostResult = "Unstable"
+                        mattermostEmoji = ":warning:"
+                    }
                 }
                 def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
                 if (testResultAction != null) {
@@ -83,6 +91,7 @@ pipeline {
 
             mattermostSend message: ""
             echo "${summary}"
+            echo "${jobconsolename}"
             // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
             echo "RESULT: ${currentBuild.result}"
