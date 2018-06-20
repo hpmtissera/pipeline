@@ -93,7 +93,7 @@ pipeline {
                 }
             }
 
-            mattermostSend
+            mattermostSend message: ""
             echo "${summary}"
             sh "echo \$jobconsolenameshell"
             sh '''
