@@ -51,7 +51,7 @@ pipeline {
                    cd ..
                    export branch_name=${PWD##*/}
                    cd -
-                   ./Build/ova-build.sh
+                   ./Build/test-script.sh
                 '''
                
             }
@@ -67,7 +67,7 @@ pipeline {
                 if (currentBuild.result == null) {
                     currentBuild.result = 'SUCCESS'
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
-                    emailext to: 'prasad@lvi.co.jp', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
+                    emailext to: 'test@test.com test1@test.com', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     if(currentBuild.result == 'FAILURE') {
                         mattermostColor = "danger"
                         mattermostResult = "Failure"
@@ -93,7 +93,7 @@ pipeline {
                 }
             }
 
-            mattermostSend message: ""
+            mattermostSend message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} after ${currentBuild.durationString.replace(' and counting', '')} <${env.BUILD_URL}|Open>${summary}"
             echo "${summary}"
             sh "echo \$jobconsolenameshell"
             sh '''
@@ -102,7 +102,6 @@ pipeline {
             '''
 
             echo "$branchname"
-            // echo "Test Status:\n  Passed: ${passed}, Failed: ${failed} ${testResultAction.failureDiffString}, Skipped: ${skipped}"
 
             echo "RESULT: ${currentBuild.result}"
             echo "Duration : ${currentBuild.durationString.replace(' and counting', '')}"
