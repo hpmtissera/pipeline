@@ -11,3 +11,5 @@ This sample project demonstrate how to write a Jenkins pipeline script. It cover
 - Publish project artifacts.  
 - Send email notification if the build is a Failure, Unstable or Back to Normal. (No emails for back to back successful builds)  
 - Send Mattermost notification with build time, build URL and test results summary.  
+
+Please refer [Wiki](https://github.com/hpmtissera/pipeline/wiki) for more details.
