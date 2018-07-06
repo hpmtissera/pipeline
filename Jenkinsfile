@@ -73,7 +73,7 @@ pipeline {
                 if (currentBuild.result == null) {
                     currentBuild.result = 'SUCCESS'
                 } else if(currentBuild.result == 'FAILURE' || currentBuild.result == 'UNSTABLE') {
-                    emailext to: 'test@test.com test1@test.com', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
+                    // emailext to: 'test@test.com test1@test.com', subject: '$DEFAULT_SUBJECT', body: '$DEFAULT_CONTENT'
                     if(currentBuild.result == 'FAILURE') {
                         mattermostColor = "danger"
                         mattermostResult = "Failure"
