@@ -67,6 +67,7 @@ pipeline {
                } catch (Exception e) {
                     currentBuild.result = 'FAILURE'
                }
+            }
 
             script {
                 if (currentBuild.result == null) {
