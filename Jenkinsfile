@@ -60,8 +60,13 @@ pipeline {
 
     post {
         always {
-            junit 'target/surefire-reports/TEST-*.xml'
-            archiveArtifacts artifacts: 'target/*'
+            script {
+                try {
+                    junit 'target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts artifacts: 'target/*'
+               } catch (Exception e) {
+                  currentBuild.result = 'FAILURE'
+               }
 
             script {
                 if (currentBuild.result == null) {
